@@ -1,7 +1,7 @@
 import React, { useState, useEffect, createContext } from 'react'
 import { setInitialGameState } from "./functions";
 
-const GameStateContext = createContext();
+export const GameStateContext = createContext();
 
 export const Solitaire = ({ numCardsPerWasteDeal, Children }) => {
   const [gameState, setGameState] = useState({});

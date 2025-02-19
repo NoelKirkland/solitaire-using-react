@@ -1,7 +1,12 @@
 const gameState = {
   _1ofS: {
     value: 'A',
+    numValue: 1,
     suit: '♠',
+    suitAbbrev: 'S',
+    color: 'black',
+    concealed: true,
+    selected: false,
     location: {
       pile: 'stock',
       pileIndex: 0,
@@ -10,7 +15,12 @@ const gameState = {
   },
   _7ofH: {
     value: '7',
+    numValue: 7,
     suit: '♥',
+    suitAbbrev: 'H',
+    color: 'red',
+    concealed: true,
+    selected: false,
     location: {
       pile: 'tableau',
       pileIndex: 4,

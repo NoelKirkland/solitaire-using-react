@@ -1,9 +1,9 @@
 import React, { useContext } from 'react'
 import { GameStateContext } from './../../index';
 import { Card } from "./../Card";
-import { filterByPile } from "./../functions";
+import { filterByPile } from "./../../functions";
 
-export const Stock = () => {
+ const Stock = () => {
     const { gameState } = useContext(GameStateContext);
     const stockPile = filterByPile(gameState, 'stock');
 
@@ -20,3 +20,5 @@ export const Stock = () => {
     </div>
   )
 }
+
+export default Stock;
