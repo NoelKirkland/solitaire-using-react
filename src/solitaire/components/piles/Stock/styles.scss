@@ -1,0 +1,36 @@
+@mixin remainingCardGap { 
+  @for $i from 1 through 9 {
+    .card:nth-of-type(#{$i}n){
+      transform: translateX(#{$i}px);
+    }
+  }
+}
+
+.card-pile {
+  position: relative;
+  
+  &_stock {
+    width: 50px;
+    height: 85px;
+    transform: translate(5px, 5px);
+    // @include remainingCardGap;
+    .empty-slot{
+      transform: translate(-5px, -5px);
+    }
+    .card:nth-of-type(1) {
+      transform: translate(-5px, -5px);
+    }
+    .card:nth-of-type(2) {
+      transform: translate(-4px, -4px);
+    }
+    .card:nth-of-type(3) {
+      transform: translate(-3px, -3px);
+    }
+    .card:nth-of-type(4) {
+      transform: translate(-2px, -2px);
+    }
+    .card:nth-of-type(5) {
+      transform: translate(-1px, -1px);
+    }
+  }
+}
