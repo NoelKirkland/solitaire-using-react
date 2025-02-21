@@ -1,9 +1,8 @@
 import React, { useContext } from 'react'
-import { GameStateContext } from '../../Solitaire';
-import { Card } from "./../Card";
-import { filterByPile } from "./../functions";
+import Card from "./../Card";
+import { filterByPile, GameStateContext } from "./../../../functions";
 
-export const Waste = () => {
+const Waste = () => {
     const { gameState } = useContext(GameStateContext);
     const wastePile = filterByPile(gameState, 'waste');
 
@@ -20,3 +19,5 @@ export const Waste = () => {
     </div>
   )
 }
+
+export default Waste;

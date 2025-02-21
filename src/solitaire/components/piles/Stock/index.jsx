@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
-import Card from "./../Card";
-import { filterByPile, GameStateContext } from "./../../functions";
+import Card from "./../../Card";
+import { filterByPile, GameStateContext } from "./../../../functions";
 const { log } = console;
 
 
