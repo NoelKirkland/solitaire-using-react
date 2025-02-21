@@ -1,0 +1,27 @@
+@mixin flexRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.game-section {
+  &_foundation {
+    width: 200px;
+    @include flexRow;
+    
+    .empty-slot {
+      // margin:0 auto;
+      position:relative;
+    
+      .empty-slot-text {
+        position:absolute;
+        width:100%;
+        margin: 0px;
+        // height:100%;
+        top:50%;
+        transform: translateY(-50%);
+        // left:50%;
+      }
+    }
+  }
+}
