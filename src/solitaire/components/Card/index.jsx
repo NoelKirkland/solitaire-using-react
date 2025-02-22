@@ -1,48 +1,39 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { GameStateContext  } from './../../state-management/GameStateContext';
+import PropTypes from "prop-types";
 import "./styles.scss";
 
-const getColorFromSuit = suit => {
-    if(suit === "♣" || suit === "♠"){
-        return 'black';
-    }
-    if(suit === "♥" || suit === "♦"){
-        return 'red';
-    }
-    return null;
-};
+const { log } = console;
 
-const getNumValue = (value) => {
-    switch(value){
-      case 'A':
-        return 1;
-      case 'J':
-        return 11;
-      case 'Q':
-        return 12;
-      case 'K':
-        return 13;
-      default:
-        return value * 1;
-    }
-  }
+const Card = ({ cardProps, cardClick }) => {
+  const { gameState, setGameState } = useContext(GameStateContext);
+  const { value, suit, color, concealed, selected } = cardProps;
+  // log(`cardClick func: ${cardClick}`)
+  // log(`The ${value} of ${suit}'s`);
+  // const [cardState, setCardState] = useState(cardProps);
+  // const { value, numValue, suit, suitAbbrev, color, concealed, selected, location, id } = cardState;
+  //   const [isConcealed, setIsConcealed] = useState(concealed);
+  //   const [isSelected, setIsSelected] = useState(selected);
+  //   const [pileLocation, setPileLocation] = useState(location);
 
-export const Card = ({value, suit}) => {
-    const [isConcealed, setIsConcealed] = useState(true);
-    const [selected, setSelected] = useState(false);
-    const [pileLocation, setPileLocation] = useState(null);
-    const color = getColorFromSuit(suit);
-    const numValue = getNumValue(value);
+  //   function updateCard(){
+  //     return setCardState(() => ({ ...cardProps}))
+  //   }
+  //   useEffect(() => {
+  //     updateCard()
+  //   },[cardProps])
 
-    function toggleConcealed(){
-      setIsConcealed(currentState => !currentState)
-    }
+  //   function handleCardClick(){
+  //     cardClick();
+  //     updateCard();
+  //   }
 
     return (
         <div
-          className={`card ${isConcealed ? 'card-concealed' : 'card-revealed'} ${selected ? 'card-selected' : ''}`}
-          onClick={toggleConcealed}
+          className={`card ${concealed ? 'card-concealed' : 'card-revealed'} ${selected ? 'card-selected' : ''}`}
+          onClick={() => cardClick(gameState, setGameState)}
         >
-            {isConcealed ? (
+            {concealed ? (
                 <div className="card__back"></div>
             ) : (
                 <div className="card__front">
@@ -52,8 +43,6 @@ export const Card = ({value, suit}) => {
                     <span className={`card__front_info card__front_info-bottom card__front_info-color-${color}`}>
                         <p className="card__front_info-text">{value}</p><p className="card__front_info-text">{suit}</p>
                     </span>
-                  {/* <div className="card__front_info">
-                  </div> */}
                 </div>
             )
             }
@@ -61,3 +50,9 @@ export const Card = ({value, suit}) => {
     );
 }
 
+export default Card;
+
+Card.propTypes = {
+  value: PropTypes.string.isRequired,
+  suit: PropTypes.string.isRequired
+}

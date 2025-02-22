@@ -1,23 +1,17 @@
-$card-width: 100px;
-$card-height: 150px;
-$card-border-radius: 10px;
-$font-size: 20px;
-$background-color: green;
+$card-width: 50px;
+$card-height: 85px;
+$card-border-radius: 3px;
+$font-size: 14px;
+$background-color: white;
 $card-background: white;
 $card-border: 2px solid black;
 $box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 
 .card {
-    width: $card-width;
-    height: $card-height;
-    background-color: $card-background;
-    border-radius: $card-border-radius;
-    box-shadow: $box-shadow;
-    padding: 0px !important;
-    position: relative;
-    border: $card-border;
-
+    // See aditional .card styles in App.scss
+    background-color: white;
     &__back {
+        pointer-events: none;
         height: 100%;
         width: 100%;
         background: 
@@ -26,8 +20,10 @@ $box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
     }
 
     &__front {
+        pointer-events: none;
         height: 100%;
         width: 100%;
+        background: $background-color;
         display: flex;
         flex-direction: column;
         justify-content: space-between;

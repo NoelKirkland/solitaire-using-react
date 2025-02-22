@@ -1,4 +1,6 @@
 import { filterByPile } from "./filterByPile";
+import { pullTopCard } from "./pullTopCard";
+const { log } = console;
 
 const SUITS = ["♠", "♣", "♥", "♦"]
 const VALUES = [
@@ -30,7 +32,8 @@ function newCard(value, suit){
       pile: undefined,
       pileIndex: null,
       subPile: undefined
-    }
+    },
+    id: `_${value}of${getSuitAbbrev(suit)}`
   };
 
   function getNumValue(value){
@@ -98,17 +101,10 @@ function shuffleDeck(cards) {
   }
 }
 
-function pullTopCard(pile){
-  const sortedPileArr = Object.entries(pile).sort(([, cardA], [, cardB]) => cardA.location.pileIndex - cardB.location.pileIndex);
-  const topCard = sortedPileArr.at(-1)[1];
-
-  return topCard;
-}
-
 function initialStockPileSetup(deck){
   const allCards = [...deck];
   const cardsObj = allCards.reduce((cards, card, i) => {
-    const cardId = `_${card.numValue}of${card.suitAbbrev}`;
+    const cardId = card.id;
 
     card.location.pile = 'stock';
     card.location.pileIndex = i;
@@ -120,26 +116,31 @@ function initialStockPileSetup(deck){
 
 function initialTableauPileSetup(allCards) {
   const stockPile = filterByPile(allCards, 'stock')
-  let tableauColumns = 7;
-  let currentColumn = 1;
-  let currentRow = 1;
+  let tableauPiles = 7;
+  let currentPile = 1;
+  let currentPileIndex = 0;
 
   for(let cardsToTableau = 0; cardsToTableau < 28; cardsToTableau++){
       let card = pullTopCard(stockPile);
 
       card.location.pile = 'tableau';
-      card.location.pileIndex = currentRow - 1;
-      card.location.subPile = currentColumn;
+      card.location.pileIndex = currentPileIndex;
+      card.location.subPile = currentPile;
 
-      if(currentColumn < tableauColumns){
-          currentColumn++
-      } else {
-          tableauColumns--;
-          currentColumn = 1;
-          currentRow++;
+      if(currentPile + currentPileIndex === 7){ 
+        // card.concealed = false;
+        // log('up card:  ', card.location);
       }
-  }
 
+      if(currentPile < tableauPiles){
+        currentPile++
+      } else {
+          tableauPiles--;
+          currentPile = 1;
+          currentPileIndex++;
+        }
+        allCards[card.id] = card;
+  }
   return allCards;
 }
 
@@ -149,6 +150,6 @@ export function setInitialGameState() {
   
   const allCardsInStockPile = initialStockPileSetup(deck);
   const allCardsAfterTableauSetup = initialTableauPileSetup(allCardsInStockPile);
-  
+  // log('allCardsAfterTableauSetup:  ', allCardsAfterTableauSetup)
   return allCardsAfterTableauSetup;
 }
