@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { GameStateContext  } from './../../../../App';
+import { GameStateContext  } from './../../../state-management/GameStateContext';
 import Card from "./../../Card";
 import { filterByPile, /* GameStateContext, pullTopCard, handleCardClick, */ handleClicks } from "./../../../functions";
 import "./styles.scss";
@@ -14,7 +14,7 @@ const Stock = () => {
   return (
     <div className='card-pile card-pile_stock'>
         {stockPileCards.length > 0 ? (
-            stockPileCards.map((cardProps, i) => <Card cardProps={cardProps} cardClick={handleStockPileClicks(cardProps)} key={i} />)
+            stockPileCards.map((card, i) => <Card cardProps={card} cardClick={handleStockPileClicks(card)} key={i} />)
           ) : (
             <div className='empty-slot' onClick={() => handleEmptyStockPileClicks(gameState, setGameState)}></div>
           )}

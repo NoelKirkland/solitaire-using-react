@@ -1,14 +1,12 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext } from 'react';
+import { GameStateContext  } from './../../../state-management/GameStateContext';
 import Card from "./../../Card";
-import { filterByPile, GameStateContext, handleCardClick } from "./../../../functions";
+import { filterByPile, handleClicks } from "./../../../functions";
 import "./styles.scss";
 const { log } = console;
 
-
-
 const Tableau = () => {
     const { gameState, setGameState } = useContext(GameStateContext);
-    const [ tableauState, setTableauState ] = useState(filterByPile(gameState, 'tableau'))
     const tableauPileCards = Object.values(filterByPile(gameState, 'tableau'));
     const allSubPilesArray = tableauPileCards.reduce((allSubPiles, card) => {
       const { subPile, pileIndex } = card.location;
