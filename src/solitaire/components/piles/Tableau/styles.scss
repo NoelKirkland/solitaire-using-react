@@ -1,0 +1,30 @@
+@mixin flexRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+
+@mixin fieldCardGap {
+  @for $i from 2 through 30 {
+    .card:nth-of-type(#{$i}){
+      transform: translateY(#{($i - 1) * 22}px);
+    }
+  }
+}
+
+.game-section {
+  
+  &_tableau {
+    width: 400px;
+    @include flexRow;
+
+    .tableau-pile {
+      @include fieldCardGap;
+    }
+    
+    .card {
+      color: red;
+    }
+  }
+}

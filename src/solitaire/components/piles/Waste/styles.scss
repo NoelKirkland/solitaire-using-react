@@ -2,4 +2,13 @@
   .empty-slot {
     transform: translate(-100%, 0%);
   }
+  .card {
+    transform: translate(-100%, 0%);
+  }
+  .card:nth-last-of-type(2){
+    left: 25px;
+  }
+  .card:nth-last-of-type(1){
+    left: 50px;
+  }
 }
