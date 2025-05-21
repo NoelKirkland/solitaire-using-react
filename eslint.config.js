@@ -33,7 +33,7 @@ export default [
         'warn',
         { allowConstantExport: true },
       ],
-      "no-unused-vars": [2, {"vars": "all", "varsIgnorePattern": "React"}],
+      "no-unused-vars": [2, {"vars": "all", "varsIgnorePattern": "React|log"}],
       'react/prop-types': 'off'
     },
   },

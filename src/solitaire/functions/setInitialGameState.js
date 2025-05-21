@@ -101,6 +101,28 @@ function shuffleDeck(cards) {
   }
 }
 
+const emptyPilesArr = [
+  { value: 'E', location: { pile: 'stock', subPile: undefined }},
+  {value: 'E', location: { pile: 'waste', subPile: undefined }},
+  {value: 'E', location: { pile: 'foundation', subPile: 'S' }},
+  {value: 'E', location: { pile: 'foundation', subPile: 'C' }},
+  {value: 'E', location: { pile: 'foundation', subPile: 'H' }},
+  {value: 'E', location: { pile: 'foundation', subPile: 'D' }},
+  {value: 'E', location: { pile: 'tableau', subPile: 1}},
+  {value: 'E', location: { pile: 'tableau', subPile: 2}},
+  {value: 'E', location: { pile: 'tableau', subPile: 3}},
+  {value: 'E', location: { pile: 'tableau', subPile: 4}},
+  {value: 'E', location: { pile: 'tableau', subPile: 5}},
+  {value: 'E', location: { pile: 'tableau', subPile: 6}},
+  {value: 'E', location: { pile: 'tableau', subPile: 7}},
+];
+const emptyPiles = emptyPilesArr.reduce((emptyPilesObj, empty) => {
+  empty.id = `_${empty.value}of${empty.location.pile}of${empty.location.subPile ? empty.location.subPile : empty.location.pile}`
+  emptyPilesObj[empty.id] = empty;
+
+  return emptyPilesObj;
+}, {})
+
 function initialStockPileSetup(deck){
   const allCards = [...deck];
   const cardsObj = allCards.reduce((cards, card, i) => {
@@ -150,6 +172,6 @@ export function setInitialGameState() {
   
   const allCardsInStockPile = initialStockPileSetup(deck);
   const allCardsAfterTableauSetup = initialTableauPileSetup(allCardsInStockPile);
-  // log('allCardsAfterTableauSetup:  ', allCardsAfterTableauSetup)
-  return allCardsAfterTableauSetup;
+  const allCardsAndEmptyPiles = { ...allCardsAfterTableauSetup, ...emptyPiles }
+  return allCardsAndEmptyPiles;
 }
